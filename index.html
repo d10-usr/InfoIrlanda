@@ -1,0 +1,1144 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghidul Românului în Irlanda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-mid: #162040;
+            --blue: #1a3a6e;
+            --accent: #e8a020;
+            --accent-light: #f5c855;
+            --green-ie: #169b62;
+            --orange-ro: #d63a2f;
+            --text: #e8edf5;
+            --text-dim: #8899bb;
+            --card-bg: rgba(255,255,255,0.04);
+            --card-border: rgba(255,255,255,0.09);
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── NOISE TEXTURE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,58,110,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 10% 80%, rgba(22,155,98,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 90% 80%, rgba(214,58,47,0.12) 0%, transparent 60%),
+                linear-gradient(180deg, #0a1628 0%, #0d1f3c 100%);
+            z-index: -1;
+        }
+
+        .hero-flags {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 40px;
+            animation: fadeDown 0.8s ease both;
+        }
+
+        .flag-strip {
+            width: 60px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .flag-ro { background: linear-gradient(90deg, #002B7F 33%, #FCD116 33% 66%, #CE1126 66%); }
+        .flag-ie { background: linear-gradient(90deg, #169b62 33%, #fff 33% 66%, #ff883e 66%); }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--white);
+            animation: fadeDown 0.9s 0.1s ease both;
+        }
+
+        .hero h1 span { color: var(--accent); }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            margin: 18px 0 36px;
+            max-width: 560px;
+            font-weight: 300;
+            animation: fadeDown 0.9s 0.2s ease both;
+        }
+
+        .badge-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            animation: fadeDown 0.9s 0.3s ease both;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 7px 18px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            letter-spacing: 0.3px;
+        }
+
+        .badge i { color: var(--accent); margin-right: 6px; }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            animation: fadeDown 1s 0.6s ease both;
+        }
+
+        .scroll-hint::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--text-dim), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,22,40,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 16px 14px;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.3;
+            line-height: 1;
+            min-width: 56px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--card-border);
+            margin: 0;
+        }
+
+        /* ── CARDS ── */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(232,160,32,0.25);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            background: rgba(232,160,32,0.12);
+            color: var(--accent);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 14px;
+        }
+
+        .check-list { list-style: none; margin: 12px 0; }
+        .check-list li {
+            font-size: 0.87rem;
+            color: var(--text-dim);
+            padding: 5px 0 5px 22px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .check-list li:last-child { border-bottom: none; }
+
+        .check-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green-ie);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 9px 18px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid rgba(232,160,32,0.4);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: rgba(232,160,32,0.12);
+            border-color: var(--accent);
+        }
+
+        /* ── ALERT BOX ── */
+        .alert {
+            background: rgba(214,58,47,0.1);
+            border: 1px solid rgba(214,58,47,0.3);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .alert i { color: #e84040; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+        .alert p { font-size: 0.88rem; color: var(--text-dim); }
+        .alert strong { color: var(--text); }
+
+        .info-box {
+            background: rgba(22,155,98,0.08);
+            border: 1px solid rgba(22,155,98,0.25);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .info-box i { color: var(--green-ie); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+        .info-box p { font-size: 0.88rem; color: var(--text-dim); }
+        .info-box strong { color: var(--text); }
+
+        /* ── TABLE ── */
+        .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--card-border); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: rgba(26,58,110,0.6); color: var(--accent); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 14px 16px; text-align: left; }
+        td { padding: 13px 16px; font-size: 0.87rem; color: var(--text-dim); border-top: 1px solid var(--card-border); }
+        td strong { color: var(--text); }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+        td a { color: var(--accent); text-decoration: none; font-size: 0.8rem; }
+        td a:hover { text-decoration: underline; }
+
+        /* ── STAT CARDS ── */
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-card .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .label {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+        }
+
+        /* ── STEPS ── */
+        .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+        .steps::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--card-border);
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .step-body h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 4px;
+            padding-top: 8px;
+        }
+
+        .step-body p { color: var(--text-dim); font-size: 0.87rem; }
+
+        /* ── CONTACT / AUTHOR CARD ── */
+        .author-section {
+            background: linear-gradient(135deg, rgba(26,58,110,0.4) 0%, rgba(10,22,40,0.8) 100%);
+            border: 1px solid rgba(232,160,32,0.2);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            margin: 80px 24px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .author-section::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,160,32,0.08), transparent 70%);
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin: 0 auto 20px;
+            border: 3px solid rgba(232,160,32,0.4);
+        }
+
+        .author-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .author-role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .author-section p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            font-size: 0.93rem;
+        }
+
+        .disclaimer-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .chip {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .chip i { color: var(--green-ie); margin-right: 6px; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--navy-mid);
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            padding: 36px 20px;
+            margin-top: 60px;
+        }
+
+        footer p { color: var(--text-dim); font-size: 0.82rem; line-height: 2; }
+        footer strong { color: var(--text); }
+
+        /* ── EMERGENCY BANNER ── */
+        .emergency-bar {
+            background: linear-gradient(90deg, rgba(214,58,47,0.85), rgba(180,30,20,0.85));
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--white);
+        }
+
+        .emergency-bar span { opacity: 0.8; font-weight: 400; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav a { padding: 12px 8px; font-size: 0.75rem; }
+            .author-section { padding: 32px 20px; }
+            .section { padding: 56px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Emergency bar -->
+<div class="emergency-bar">
+    🚨 URGENȚE: Poliție / Ambulanță / Pompieri → <strong>999</strong> sau <strong>112</strong> &nbsp;|&nbsp; <span>Ambasada RO Dublin (urgențe): +353 86 468 4351</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-flags">
+        <div class="flag-strip flag-ro" title="România"></div>
+        <div class="flag-strip flag-ie" title="Irlanda"></div>
+    </div>
+    <h1>Ghidul <span>Românului</span><br>în Irlanda</h1>
+    <p class="hero-sub">Informații oficiale, drepturi legale și resurse practice pentru comunitatea românească din Irlanda.</p>
+    <div class="badge-bar">
+        <div class="badge"><i class="fas fa-shield-alt"></i>Informații verificate</div>
+        <div class="badge"><i class="fas fa-heart"></i>Non-profit, comunitar</div>
+        <div class="badge"><i class="fas fa-sync-alt"></i>Actualizat 2026</div>
+        <div class="badge"><i class="fas fa-users"></i>Comunitatea Românească</div>
+    </div>
+    <div class="scroll-hint">Explorează</div>
+</section>
+
+<!-- NAV -->
+<nav>
+    <a href="#documente"><i class="fas fa-id-card"></i> Documente</a>
+    <a href="#munca"><i class="fas fa-briefcase"></i> Muncă</a>
+    <a href="#locuinta"><i class="fas fa-home"></i> Locuință</a>
+    <a href="#sanatate"><i class="fas fa-heartbeat"></i> Sănătate</a>
+    <a href="#consular"><i class="fas fa-landmark"></i> Consular</a>
+    <a href="#auto"><i class="fas fa-car"></i> Auto</a>
+    <a href="#ajutor"><i class="fas fa-hands-helping"></i> Ajutor</a>
+</nav>
+
+<!-- ─── 1. DOCUMENTE ─── -->
+<div class="section" id="documente">
+    <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+            <h2>Primii Pași — Documente Esențiale</h2>
+            <p>Ce ai nevoie imediat după sosire</p>
+        </div>
+    </div>
+
+    <div class="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Important:</strong> Fără PPS Number nu poți lucra legal, nu poți deschide cont bancar complet și nu ai acces la servicii sociale. Acesta este primul document de obținut.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-id-card"></i></div>
+            <h3>PPS Number (PPSN)</h3>
+            <p>Numărul Personal de Servicii Publice. Fără el nu poți lucra legal în Irlanda. Se solicită online sau la oficiul local Intreo.</p>
+            <ul class="check-list">
+                <li>Pașaport sau carte de identitate românească valabilă</li>
+                <li>Dovada adresei în Irlanda (factură utilități, contract chirie)</li>
+                <li>Motivul solicitării (angajare, servicii sociale, studii)</li>
+                <li>Procesare: de obicei 5-10 zile lucrătoare</li>
+            </ul>
+            <a href="https://www.gov.ie/en/department-of-social-protection/services/get-a-personal-public-service-pps-number/" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> Aplică Oficial</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-credit-card"></i></div>
+            <h3>Public Services Card (PSC)</h3>
+            <p>Cardul de identitate pentru servicii guvernamentale irlandeze. Oferă acces la MyGovID — platforma digitală de stat.</p>
+            <ul class="check-list">
+                <li>Necesar pentru accesarea beneficiilor sociale</li>
+                <li>Permite înregistrarea la medic (GP)</li>
+                <li>Identificare acceptată în instituțiile publice</li>
+                <li>Gratuit — se solicită la oficiul Intreo</li>
+            </ul>
+            <a href="https://www.citizensinformation.ie/en/social-welfare/irish-social-welfare-system/public-services-card/" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> Detalii PSC</a>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+        <div class="card-icon"><i class="fas fa-university"></i></div>
+        <h3>Cont Bancar în Irlanda</h3>
+        <p>Deschiderea unui cont bancar necesită PPS Number și dovada adresei. Cele mai populare bănci pentru imigranți:</p>
+        <div class="grid-3" style="margin-top: 16px; gap: 12px;">
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">Bank of Ireland</strong>
+                <p style="font-size:0.82rem; margin-top: 4px;">Cea mai răspândită, necesită programare.</p>
+                <a href="https://www.bankofireland.com" class="btn" style="margin-top: 8px;" target="_blank">BOI.com</a>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">Revolut / N26</strong>
+                <p style="font-size:0.82rem; margin-top: 4px;">Online, rapid, fără coadă — ideal la început.</p>
+                <a href="https://www.revolut.com" class="btn" style="margin-top: 8px;" target="_blank">Revolut.com</a>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">AIB (Allied Irish)</strong>
+                <p style="font-size:0.82rem; margin-top: 4px;">Opțiune bună cu rețea largă de ATM-uri.</p>
+                <a href="https://aib.ie" class="btn" style="margin-top: 8px;" target="_blank">AIB.ie</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Sfat practic:</strong> Deschide un cont Revolut imediat după sosire — nu necesită adresă dovedită și funcționează imediat. Ulterior, deschide cont la o bancă tradițională pentru salariu și utilități.</p>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 2. MUNCĂ ─── -->
+<div class="section" id="munca">
+    <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+            <h2>Muncă și Impozitare</h2>
+            <p>Sistemul PAYE, drepturi la muncă și taxe</p>
+        </div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom: 32px;">
+        <div class="stat-card">
+            <div class="num">€14.15</div>
+            <div class="label">Salariu minim/oră (2026)</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">20%</div>
+            <div class="label">Income Tax (primii €42.000)</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">40%</div>
+            <div class="label">Income Tax (peste €42.000)</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">4%</div>
+            <div class="label">PRSI (asigurări sociale)</div>
+        </div>
+    </div>
+
+    <div class="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Emergency Tax:</strong> Dacă nu te înregistrezi pe Revenue MyAccount, angajatorul reține taxe la cota de urgență (aprox. 40% + USC). Înregistrează-te ÎNAINTE de prima zi de muncă pe <strong>revenue.ie/myaccount</strong>.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+            <h3>Sistemul PAYE & Revenue</h3>
+            <p>Impozitele se rețin direct din salariu. Componentele principale:</p>
+            <ul class="check-list">
+                <li><strong>Income Tax:</strong> 20% până la €42.000, 40% peste</li>
+                <li><strong>USC:</strong> Universal Social Charge (0.5% - 8%)</li>
+                <li><strong>PRSI:</strong> Asigurare socială 4% (Class A)</li>
+                <li><strong>Tax Credits:</strong> Reduceri — personal credit €1.875/an</li>
+            </ul>
+            <a href="https://www.revenue.ie/en/jobs-and-pensions/index.aspx" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> Revenue.ie</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+            <h3>Drepturi la Muncă (WRC)</h3>
+            <p>Workplace Relations Commission protejează drepturile angajaților. Reclamațiile se depun online, gratuit.</p>
+            <ul class="check-list">
+                <li>Salariu minim garantat €13.50/oră</li>
+                <li>Concediu anual: minimum 4 săptămâni</li>
+                <li>Concediu medical plătit (sick leave) din 2023</li>
+                <li>Protecție împotriva concedierii abuzive</li>
+            </ul>
+            <a href="https://www.workplacerelations.ie/en/" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> WRC Oficial</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-bottom: 16px;"><i class="fas fa-table" style="color:var(--accent); margin-right:10px;"></i>Ghid rapid impozitare 2024</h3>
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>Termen</th>
+                    <th>Explicație</th>
+                    <th>Cotă / Valoare</th>
+                    <th>Link</th>
+                </tr>
+                <tr><td><strong>Income Tax</strong></td><td>Impozit pe venit</td><td>20% / 40%</td><td><a href="https://www.revenue.ie">revenue.ie</a></td></tr>
+                <tr><td><strong>USC</strong></td><td>Universal Social Charge</td><td>0.5% - 8%</td><td><a href="https://www.citizensinformation.ie">citizensinformation.ie</a></td></tr>
+                <tr><td><strong>PRSI</strong></td><td>Asigurare socială</td><td>4% (Class A)</td><td><a href="https://www.gov.ie">gov.ie</a></td></tr>
+                <tr><td><strong>Tax Credit Personal</strong></td><td>Reducere impozit</td><td>€1.875/an</td><td><a href="https://www.revenue.ie">revenue.ie</a></td></tr>
+                <tr><td><strong>Tax Credit Angajat</strong></td><td>Credit PAYE angajat</td><td>€1.875/an</td><td><a href="https://www.revenue.ie">revenue.ie</a></td></tr>
+                <tr><td><strong>Salariu minim</strong></td><td>Național, orele din 2024</td><td>€13.50/oră</td><td><a href="https://www.workplacerelations.ie">wrc.ie</a></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-umbrella"></i></div>
+            <h3>Șomaj și Beneficii Sociale</h3>
+            <p>Dacă rămâi fără loc de muncă, ai dreptul la Jobseeker's Benefit dacă ai cotizat PRSI minim 104 săptămâni.</p>
+            <ul class="check-list">
+                <li><strong>Jobseeker's Benefit:</strong> €232/săptămână (maxim 9 luni)</li>
+                <li><strong>Jobseeker's Allowance:</strong> pe baza venitului familiei</li>
+                <li>Înregistrare la Intreo (oficiu șomaj local)</li>
+                <li>Trebuie să fii disponibil activ pentru muncă</li>
+            </ul>
+            <a href="https://www.citizensinformation.ie/en/social-welfare/unemployed-people/jobseekers-benefit/#b7107b" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> Gov.ie Șomaj</a>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 3. LOCUINȚĂ ─── -->
+<div class="section" id="locuinta">
+    <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+            <h2>Locuință și Chirie</h2>
+            <p>Cum găsești și cum îți protejezi drepturile ca și chiriaș</p>
+        </div>
+    </div>
+
+    <div class="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Criza locuințelor:</strong> Irlanda are una dintre cele mai scumpe piețe imobiliare din Europa. Dublin — chiria medie pentru un apartament cu o cameră depășește €2.000/lună. Căutați camere în shared accommodation la început.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-search"></i></div>
+            <h3>Unde Găsești Locuință</h3>
+            <ul class="check-list">
+                <li><strong>Daft.ie</strong> — cea mai mare platformă irlandeză</li>
+                <li><strong>Rent.ie</strong> — alternativă bună pentru camere</li>
+                <li><strong>Facebook Groups</strong> — "Romanians in Ireland", grupuri locale</li>
+                <li><strong>Adverts.ie</strong> — anunțuri diverse, inclusiv locuințe</li>
+                <li>Colegii de muncă și comunitate locală (word of mouth)</li>
+            </ul>
+            <a href="https://www.daft.ie" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> Daft.ie</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Drepturile Tale ca Chiriaș</h3>
+            <p>RTB (Residential Tenancies Board) reglementează piața de chirie și protejează chiriașii.</p>
+            <ul class="check-list">
+                <li>Contractul trebuie înregistrat la RTB</li>
+                <li>Preaviz legal la evacuare: min. 90 zile (după 6 luni)</li>
+                <li>Depozitul nu poate depăși o lună de chirie</li>
+                <li>Proprietarul nu poate intra fără notificare de 24h</li>
+            </ul>
+            <a href="https://www.rtb.ie" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> RTB Oficial</a>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-home"></i></div>
+            <h3>Housing Assistance Payment (HAP)</h3>
+            <p>Ajutor de stat pentru chirie dacă îndeplinești condițiile de eligibilitate pe baza venitului.</p>
+            <ul class="check-list">
+                <li>Se solicită la Primăria locală (Local Authority)</li>
+                <li>Proprietarul trebuie să accepte HAP</li>
+                <li>Lista de așteptare poate fi lungă</li>
+            </ul>
+            <a href="https://www.citizensinformation.ie/en/housing/renting-a-home/help-with-renting/housing-assistance-payment/" class="btn" target="_blank">Detalii HAP</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-hands-helping"></i></div>
+            <h3>Ajutor la Probleme cu Chiria</h3>
+            <p>Organizația Threshold oferă consiliere gratuită chiriașilor în dificultate.</p>
+            <ul class="check-list">
+                <li>Consiliere gratuită: 1800 454 454</li>
+                <li>Ajutor la disputele cu proprietarul</li>
+                <li>Informații despre drepturile legale</li>
+            </ul>
+            <a href="https://www.threshold.ie" class="btn" target="_blank">Threshold.ie</a>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 4. SĂNĂTATE ─── -->
+<div class="section" id="sanatate">
+    <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+            <h2>Sănătate — Sistemul HSE</h2>
+            <p>Medic de familie, spital, cardul medical</p>
+        </div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-id-card-alt"></i></div>
+            <h3>Medical Card</h3>
+            <p>Gratuitate totală pentru consultații GP, medicamente și spitalizare. Se acordă pe baza venitului.</p>
+            <ul class="check-list">
+                <li>GP, dentist, optician — gratuit</li>
+                <li>Medicamente prescrise — gratuit</li>
+                <li>Spitalizare — gratuită</li>
+                <li>Eligibil: venituri mici sau beneficii sociale</li>
+            </ul>
+            <a href="https://www.hse.ie/eng/cards-schemes/medical-card/" class="btn" target="_blank">Aplică Medical Card</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-stethoscope"></i></div>
+            <h3>GP Visit Card</h3>
+            <p>Consultații la medicul de familie gratuite, chiar dacă nu ai Medical Card complet.</p>
+            <ul class="check-list">
+                <li>Consultații GP gratuite</li>
+                <li>Nu include medicamente gratuite</li>
+                <li>Mai ușor de obținut decât Medical Card</li>
+                <li>Eligibil: venituri sub pragul stabilit</li>
+            </ul>
+            <a href="https://www.hse.ie/eng/cards-schemes/gp-visit-cards/" class="btn" target="_blank">GP Visit Card</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-pills"></i></div>
+            <h3>Drug Payment Scheme</h3>
+            <p>Dacă nu ai Medical Card, plătești maxim €80/lună pe medicamente pentru toată familia.</p>
+            <ul class="check-list">
+                <li>Plafon lunar: €80 per familie</li>
+                <li>Se înregistrează la farmacie</li>
+                <li>Nu necesită verificare venituri</li>
+            </ul>
+            <a href="https://www.hse.ie/eng/cards-schemes/drug-payment-scheme/" class="btn" target="_blank">DPS Info</a>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+        <h3 style="margin-bottom: 16px;"><i class="fas fa-hospital" style="color:var(--accent); margin-right:10px;"></i>Cum Găsești un Medic de Familie (GP)</h3>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Caută un GP în zona ta</h4>
+                    <p>Folosește <a href="https://www.hse.ie" style="color:var(--accent);">hse.ie</a> sau întreabă vecinii/colegii pentru recomandări locale.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Verifică dacă acceptă pacienți noi</h4>
+                    <p>Mulți GP au lista plină. Sună înainte de vizită.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Înregistrează-te</h4>
+                    <p>Vei avea nevoie de PPS Number, PSC și dovada adresei.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Aplică pentru Medical Card / GP Visit Card</h4>
+                    <p>Dacă ești eligibil, consultațiile vor fi gratuite sau subvenționate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p><strong>Urgențe psihice și sănătate mentală:</strong> Samaritans Ireland: <strong>116 123</strong> (gratuit, 24/7). Pieta House: <strong>116 123</strong>. Nu ezita să ceri ajutor.</p>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 5. CONSULAR ─── -->
+<div class="section" id="consular">
+    <div class="section-header">
+        <div class="section-num">05</div>
+        <div>
+            <h2>Servicii Consulare Românești</h2>
+            <p>Ambasada, pașapoarte, stare civilă</p>
+        </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-landmark"></i></div>
+            <h3>Ambasada României în Dublin</h3>
+            <p><strong>Adresă:</strong> 26 Waterloo Road, Ballsbridge, Dublin 4.</p>
+            <ul class="check-list">
+                <li>Programări: <strong>econsulat.ro</strong></li>
+                <li>Urgențe consulare: <strong>+353 86 468 4351</strong></li>
+                <li>Email: dublin@mae.ro</li>
+                <li>Program: Luni-Vineri, 9:00-12:00 (ghișeu)</li>
+            </ul>
+            <a href="https://dublin.mae.ro" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> dublin.mae.ro</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-passport"></i></div>
+            <h3>Pașaport și Acte Identitate</h3>
+            <p>Reînnoirea documentelor românești direct la ambasadă, cu programare prealabilă.</p>
+            <ul class="check-list">
+                <li>Pașaport simplu electronic: valabil 10 ani</li>
+                <li>Carte de identitate: valabilă 10 ani</li>
+                <li>Programare obligatorie pe econsulat.ro</li>
+                <li>Timp procesare: 30-60 zile în general</li>
+            </ul>
+            <a href="https://www.econsulat.ro" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> eConsulat.ro</a>
+        </div>
+    </div>
+
+    <div class="grid-3">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-baby"></i></div>
+            <h3>Naștere Copil în Irlanda</h3>
+            <ul class="check-list">
+                <li>Înregistrare la HSE (General Register Office)</li>
+                <li>Certificat naștere irlandez</li>
+                <li>Transcriere la Ambasada RO pentru cetățenie română</li>
+                <li>Copilul poate deține dubla cetățenie</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-ring"></i></div>
+            <h3>Căsătorie și Divorț</h3>
+            <ul class="check-list">
+                <li>Notificare la Registrar cu 3 luni înainte</li>
+                <li>Recunoaștere în România prin Ambasadă</li>
+                <li>Divorț: solicitat la Irish Courts Service</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-vote-yea"></i></div>
+            <h3>Vot Românii din Diasporă</h3>
+            <ul class="check-list">
+                <li>Vot la Ambasadă (alegeri parlamentare, prezidențiale)</li>
+                <li>Înregistrare online pe votstrainatate.ro</li>
+                <li>Drept de vot fără limită de ani în diasporă</li>
+            </ul>
+            <a href="https://www.votstrainatate.ro" class="btn" target="_blank">Vot Diasporă</a>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 6. AUTO ─── -->
+<div class="section" id="auto">
+    <div class="section-header">
+        <div class="section-num">06</div>
+        <div>
+            <h2>Auto și Transport</h2>
+            <p>Permis de conducere, înmatriculare, asigurare</p>
+        </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-id-badge"></i></div>
+            <h3>Schimbarea Permisului Românesc</h3>
+            <p>Permisul românesc (UE) este valid în Irlanda atât cât este în termen. Schimbarea cu cel irlandez se face la NDLS.</p>
+            <ul class="check-list">
+                <li>Cost schimbare: <strong>€65</strong></li>
+                <li>Nu necesită examen dacă permisul RO e valabil</li>
+                <li>Necesită: PPS Number, dovada adresei, permis original</li>
+                <li>Procesare la National Driver Licence Service (NDLS)</li>
+            </ul>
+            <a href="https://www.ndls.ie" class="btn" target="_blank"><i class="fas fa-external-link-alt"></i> NDLS.ie</a>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-car-alt"></i></div>
+            <h3>Înmatricularea Vehiculului</h3>
+            <p>Mașina trebuie înmatriculată în Irlanda dacă ești rezident permanent. Se face la Revenue (VRT).</p>
+            <ul class="check-list">
+                <li>Termen: 30 zile de la stabilirea rezidenței</li>
+                <li>VRT (Vehicle Registration Tax) — calculată pe modelul mașinii</li>
+                <li>NCT (inspecție tehnică) obligatorie</li>
+                <li>Asigurare obligatorie înainte de circulație</li>
+            </ul>
+            <a href="https://www.revenue.ie/en/vrt/index.aspx" class="btn" target="_blank">VRT Info</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-bottom: 16px;"><i class="fas fa-bus" style="color:var(--accent); margin-right:10px;"></i>Transport Public</h3>
+        <div class="grid-3" style="gap: 12px;">
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">Leap Card</strong>
+                <p style="font-size:0.82rem; margin-top: 4px; color: var(--text-dim);">Card de transport pentru reduceri pe autobuz, DART, Luas și tren. Economisești 20-30% față de biletele clasice.</p>
+                <a href="https://www.leapcard.ie" class="btn" style="margin-top:8px;" target="_blank">Leap Card</a>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">Dublin Bus / Bus Éireann</strong>
+                <p style="font-size:0.82rem; margin-top: 4px; color: var(--text-dim);">Rețea extinsă în Dublin și național. App: Dublin Bus sau TFI Live pentru trasee în timp real.</p>
+                <a href="https://www.dublinbus.ie" class="btn" style="margin-top:8px;" target="_blank">DublinBus.ie</a>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 16px; border: 1px solid var(--card-border);">
+                <strong style="color: var(--white);">Irish Rail (DART/Tren)</strong>
+                <p style="font-size:0.82rem; margin-top: 4px; color: var(--text-dim);">Trenuri naționale și DART (Dublin Area Rapid Transit) de-a lungul coastei.</p>
+                <a href="https://www.irishrail.ie" class="btn" style="margin-top:8px;" target="_blank">IrishRail.ie</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── 7. AJUTOR ─── -->
+<div class="section" id="ajutor">
+    <div class="section-header">
+        <div class="section-num">07</div>
+        <div>
+            <h2>Resurse și Ajutor Comunitar</h2>
+            <p>Organizații, numere utile și comunitatea românească</p>
+        </div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-phone-alt"></i></div>
+            <h3>Numere Utile</h3>
+            <ul class="check-list">
+                <li><strong>Urgențe:</strong> 999 / 112</li>
+                <li><strong>Garda (poliție):</strong> 1800 666 111</li>
+                <li><strong>HSE Line:</strong> 1800 700 700</li>
+                <li><strong>Samaritans:</strong> 116 123</li>
+                <li><strong>Threshold:</strong> 1800 454 454</li>
+                <li><strong>Citizens Info:</strong> 0818 074 000</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-globe"></i></div>
+            <h3>Site-uri Esențiale</h3>
+            <ul class="check-list">
+                <li><a href="https://www.citizensinformation.ie" style="color:var(--accent);">citizensinformation.ie</a> — ghid complet</li>
+                <li><a href="https://www.gov.ie" style="color:var(--accent);">gov.ie</a> — servicii guvernamentale</li>
+                <li><a href="https://www.revenue.ie" style="color:var(--accent);">revenue.ie</a> — taxe și impozite</li>
+                <li><a href="https://www.hse.ie" style="color:var(--accent);">hse.ie</a> — sănătate</a></li>
+                <li><a href="https://www.rtb.ie" style="color:var(--accent);">rtb.ie</a> — locuință</li>
+                <li><a href="https://www.workplacerelations.ie" style="color:var(--accent);">workplacerelations.ie</a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-users"></i></div>
+            <h3>Comunitate Românească</h3>
+            <ul class="check-list">
+                <li>Facebook: "Românii din Irlanda"</li>
+                <li>Facebook: "Romanians in Dublin"</li>
+                <li>Grupuri locale pe județe și orașe</li>
+                <li>USR Diaspora D10 — Irlanda</li>
+                <li>Asociații românești locale (ARCI, etc.)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Drept European:</strong> Ca cetățean UE/România, ai drept de liberă circulație și ședere în Irlanda fără viză. Nu ai nevoie de permis de ședere, dar după 3 luni trebuie să poți dovedi că ești angajat, student sau că ai resurse proprii.</p>
+    </div>
+</div>
+
+<!-- ─── AUTHOR SECTION ─── -->
+<div class="author-section">
+    <div class="author-avatar"><i class="fas fa-user-tie"></i></div>
+    <h3>Alin Jaleru</h3>
+    <div class="author-role">USR Diaspora · D10 Irlanda · Reprezentant Comunitar</div>
+    <p>Acest ghid este un proiect <strong>non-profit</strong>, realizat din dorința de a sprijini comunitatea românească din Irlanda. Scopul este să simplific accesul la informații oficiale și să ajut fiecare român care ajunge în Irlanda să se integreze mai ușor și mai rapid.</p>
+    <div class="disclaimer-chips">
+        <div class="chip"><i class="fas fa-check-circle"></i>Proiect non-profit</div>
+        <div class="chip"><i class="fas fa-check-circle"></i>Fără afiliere comercială</div>
+        <div class="chip"><i class="fas fa-check-circle"></i>Informații din surse oficiale</div>
+        <div class="chip"><i class="fas fa-check-circle"></i>Comunitate românească</div>
+        <div class="chip"><i class="fas fa-check-circle"></i>Actualizat periodic</div>
+    </div>
+    <p style="font-size:0.82rem; opacity:0.6;">Consultați întotdeauna sursele oficiale enumerate în ghid pentru informații legislative actualizate. Acest material nu constituie consultanță juridică sau financiară.</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p style="font-size:1rem; color: var(--text); margin-bottom: 8px;">Ghidul Românului în Irlanda &copy; 2026</p>
+    <p>Realizat de <strong>Alin Jaleru</strong> — USR Diaspora, D10-Irlanda</p>
+    <p style="margin-top: 8px;">Proiect non-profit · Informații din surse oficiale irlandeze și române</p>
+    <p style="margin-top: 16px; font-size:0.78rem; opacity:0.5;">Urgențe: 999 / 112 &nbsp;|&nbsp; Ambasada RO Dublin: +353 86 468 4351 &nbsp;|&nbsp; Samaritans: 116 123</p>
+</footer>
+
+</body>
+</html>
